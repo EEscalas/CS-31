@@ -1,0 +1,74 @@
+Elena Escalas
+CS 31 Project 4 Report
+
+Noteable Obstacles:
+Since it has started to be a while since we learned the super basics of C++, I have found myself making a few of the
+careless errors that we discussed in the first few weeks of the course. For example, I got stuck because I forgot to
+use a second = sign within an if statement. Little things like this tripped me up a little bit.
+The other big thing I struggled with was figuring out when the program would return -1 and when it would return zero.
+It took quite a few readings of the spec to understand which returned which for each program.
+I also started out with a seperate function to determine if n was valid, but then later realized it depended on the
+program, and also that it was not possible for us to determine whether or not n was larger than the actual size of
+the array.
+I would say in general I struggled most with the functions that required putting the array in a new order, especially
+with split, because I would keep getting one of the elements duplicated while one was missing, but eventually I 
+figured out that this was just because I would reference the array I was modifying instead of the copy of a[].
+
+Test Data:
+
+a[4] = { "louis", "harry", "niall", "liam" };
+b[5] = { "liam", "louis", "harry", "zayn", "niall" };
+c[3] = { "liam", "louis", "harry"};
+d[5] = { "niall", "harry", "", "liam", "louis"};
+e[9] = { "niall", "harry", "harry", "louis", "liam", "liam", "liam", "louis"};
+f[2] = { "perry", "taylor", "briana"};
+
+int appendToAll(string a[], int n, string value);
+	An input with a negative n value should return -1: (a, -2, "!?!")
+	An input with a valid n value should properly append value to all and return n: (a, 4, " is popular")
+	When n = 0 the function should return zero and the elements of the array should remain unchanged (b, 0, " is bae")
+int lookup(const string a[], int n, string target);
+	An input with a negative n value should return -1: (a, -2, "liam")
+	An n value of zero shoudl return 
+	An input with a valid n should properly "lookup" the elements that are equal to the target (c, 3, "harry")
+	An input with a valid n that contains a target not in the element should return -1 (d, 5, "zayn")
+int positionOfMax(const string a[], int n);
+	An input with a negative n value should return -1: (a, -2)
+	If the array is empty, the program should return -1 (b, 0)
+	An input with a valid n value should properly find the position of the max (b, 5)
+int rotateLeft(string a[], int n, int pos);
+	An input with a negative n value should return -1: (a, -2, 1)
+	If the array is empty, the program should return position without modifying the array: (b, 0, 3)
+	An input with a valid n value should properly rotate values right of the element at position pos and move pos to the end: (c, 3, 2)
+	An input with a valid n value, where pos equals the last element in the array should properly not modify the array: (d, 5, 4)
+	A pos that is greater than the number of elements in the array (n) should return -1 (d, 5, 6)
+int countRuns(const string a[], int n);
+	An input with a negative n value should return -1: (a, -2)
+	An empty array (n == 0) should return 0: (b, 0)
+	A valid n input should properly count the number of consecutive identical elements: (e, 9)
+int flip(string a[], int n);
+	An input with a negative n value should return -1: (a, -2)
+	An empty array should return 0: (d, 0)
+	A valid n input should properly flip the array around: (b, 5)
+int differ(const string a1[], int n1, const string a2[], int n2);
+	An input with a negative n value should return -1: (a, -2, b, 3)
+	An empty array (n == 0) should return 0 because there are no elements that are equal: (d, 0, e, 9)
+	When n1 is greater than n2 and all elements are equal throughtout the smaller array, the function should return n2: (b, 5, c, 3)
+	When n1 is greater than n2 and all elements are equal throughtout the smaller array, the function should return n2: (c, 3, b, 5)
+	A valid n1 and n2 input where the elements are not equal throughout: (d, 5, e, 9)
+int subsequence(const string a1[], int n1, const string a2[], int n2);
+	An input with a negative n value should return -1: (a, 2, b, -3)
+	An empty array should return 0, because it is a subsequence of any array starting at position 0: (d, 5, c, 0)
+	a2 is a valid subsequence of a1, the function properly returns the position where it begins: (b, 5, c, 3)
+int lookupAny(const string a1[], int n1, const string a2[], int n2);
+	An input with a negative n value should return -1: (a, -2, b, -3)
+	An empty array of a1 or a2 should return -1: (a, 0, b, 0)
+	a1 does not contain any of the elements in a2, return -1: (e, 9, f, 2)
+	n1 and n2 are valid and a1 contains an element of a2: (b, 5, c, 3)
+int split(string a[], int n, string splitter);
+	An input with a negative n value should return -1: (a, -2, "louis")
+	An n value of 0 should return 0: (a, 0)
+	When there are no values greater than the splitter: (a, 4, "zenophobia")
+	When there are no values less than the splitter: (a, 4, "at")
+	When the splitter is not an element of the array: (a, 4, "sarah")
+	when the splitter is an element of the array: (a, 4, "niall")

@@ -1,0 +1,98 @@
+Elena Escalas
+CS 31 Project 5 Report
+
+Obstacles Overcome:
+I had a hard time for a while determining whether or not the word was a valid word or not.
+I would loop through the characters of the rows and compare them to those of my probe word,
+but I kept getting bugs that looked rather ridiculous on the screen: such as "the secret word
+is rain" and then when I would type out "rain" it would reply with "I don't know that word."
+I managed to fix my bugs, but it took quite a bit of work. It was helpful to take a break and
+work on other parts of the program and then come back to that part later so that it wouldn't be
+as stressful.
+My MAIN obstacle in this project was those dreaded DOUBLE LETTERS. I particularly despised
+"stressed" (oh the irony) and "bazaar." It was good that I was able to look in the word list
+and find troubling words, but it took a lot of different logic to find out how to deal with
+the problem of having too many pebbles. I am pretty positive that I fixed this problem, but
+then again it is very hard to tell. The main difference between this obstacle and other 
+obstacles I have dealt with on other projects is that I tried probably 5 or so completely
+different logical methods of solving the problem until I found one that worked consistently.
+Usually I find some little errors and my logic is fine, but with this problem I had to really
+test my creativity when it came to solving this problem.
+
+
+Program Description:
+set the maximum number of words to a constant of 9000;
+set the maximum word length to a constant of 9000;
+
+establish the functions for loadwords, randint, and manageoneround
+
+create an array with possible words as the rows and their letters as the columns
+set nWords to the value given by the function loadWords (puts the possible words from a local .txt file into the array)
+
+set rounds equal to 0;
+ask how many rounds the person would like to play;
+input the rounds;
+
+if the rounds are not positive: tell the user that they must be positive;
+
+set the running total and max to 0 and the minimum to the maximum possible number of tries
+
+go through the following process until you have done so for all rounds:
+	output the round number and the number of letters in the secret word
+	set roundScore as the number of tries it takes to get the secret word (go through ManageOneRound function (see below)*)
+	if the round score is -1:
+		tell the user they have messed up and break out of the program;
+	if the round score is 1:
+		tell the user they got the secret word in 1 try;
+	if the round score is not 1:
+		tell the user the number of "tries" it took them;
+	round all the following outputted values to the nearest two decimal places;
+	set mean to 0;
+	add the previous # of tries to the running total;
+	calculate the average by dividing the running total by the rounds completed;
+	if this round's score is lower than the minimum score:
+		make this round's score the minimum score;
+	if this round's score is greater than the maximum score:
+		make this round's score the maximum score;
+	output the average, minimum, and maximum
+
+*manageOneRound:
+
+if any of the values inputted into the function are invalid, return -1;
+set tries equal to 1;
+establish an array called guess that contains the probe word;
+repeatedly:
+	prompt for the probe word;
+	set valid equal to 0;
+	if the probe word is not between 4 and 6 characters:
+		tell the user their probe word is invalid and set valid equal to 1;
+	else if the first letter of the guess is not lower case:
+		tell the user their probe word is invalid and set valid equal to 1;
+	else go through and make sure every letter is valid
+		if a letter is not valid:
+			tell the user their probe word is invalid and set valid equal to 1;
+	go through every word in the words list
+		if the first letter of the first word is the same as the first letter of the guess:
+			go through every letter of the word to make sure the guess matches the word in the words array;
+			if the word is valid, set validword equal to 1;
+	if the validword is not equal to one:
+		tell the user you don't know that word and set valid equal to 1
+	if the words are the same length:
+		go through the guess and see if it is one of the words in the list
+			if it is one of the words in the list: return the number of tries it took to get there;
+			if one of the letters is not the same: break out of the loop so you can eventually increase tries by 1;
+	create an array that acts as a mask so that there is not an overlap of rocks and pebbles;
+	set pebbles and rocks equal to 0;
+	go through all the characters of the secret word:
+		if a letter is in the correct spot:
+			mask the position of this letter and increase the value of rocks by 1;
+		else set counter equal to 0 and:
+			go through every unmasked letter of the guess and see if it matches any letter in the secret word
+				if it does: mask that letter and increase pebbles by one
+				if the you have adjacent duplicate letters:
+					count how many of that letter there are in the whole secret word
+					if there are more than two:
+						increase pebbles;
+					otherwise: decrease the value of pebbles by one to account for the duplicate
+	if valid equals zero (none of the above tests have changed it to 1):
+		output the number of rocks and pebbles and increase the number of tries; 

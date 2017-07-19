@@ -1,0 +1,50 @@
+	/*string firstElement = a[0];
+	string lastElement = a[n - 1];
+	int LTsplitter = 0;
+	int GTsplitter = 0;
+	int ETsplitter = 0;
+	for (int r = 0; r < n; r++)
+	{
+		if (a[r] < splitter)
+			LTsplitter++;
+		else if (a[r] > splitter)
+			GTsplitter++;
+		else
+			ETsplitter++;		
+	}
+	int LTemptySpace = 0;
+	int GTemptySpace = n-1;
+	for (int pos = 0; pos < n; pos++)
+	{
+		if (a[pos] < splitter && pos <= LTsplitter)
+			continue;
+		if (a[pos] > splitter && pos <= (n - (LTsplitter + ETsplitter)))
+			continue;
+		if (a[pos] == splitter && pos > LTsplitter && pos < n - LTsplitter)
+			continue;
+		if (a[pos] < splitter)
+		{
+			a[LTemptySpace] = a[pos];
+			LTemptySpace = pos;
+		}
+		if (a[pos] > splitter)
+		{
+			a[GTemptySpace] = a[pos];
+			GTemptySpace = pos;
+		}
+	}
+
+	if (firstElement < splitter)
+		a[LTemptySpace] = firstElement;
+	if (firstElement > splitter)
+		a[GTemptySpace] = firstElement;
+	if (firstElement == splitter)
+		a[LTemptySpace + 1] = firstElement;
+	if (lastElement < splitter)
+		a[LTemptySpace] = lastElement;
+	if (lastElement > splitter)
+		a[GTemptySpace] = lastElement;
+	if (lastElement == splitter)
+		a[LTemptySpace] = lastElement;
+
+	return LTemptySpace;*/

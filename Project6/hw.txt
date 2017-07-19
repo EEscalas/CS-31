@@ -1,0 +1,126 @@
+*****1*****
+a)
+int main()
+{
+	int arr[3] = { 5,10,15 };
+	int* ptr = arr;
+
+	*ptr = 30;
+	*(ptr + 1) = 20;
+	ptr += 2;
+	ptr[0] = 10;
+
+	ptr = arr;
+
+	while (ptr <= (arr + 2))
+	{
+		cout << *ptr << endl;
+		ptr++;
+	}
+}
+b) This function will properly set the pToMax parameter to the point of the 
+maximum item, but the caller will not know that item's location because
+pToMax does not properly reference ptr:
+	You can fix this by referring pToMax to ptr when initializing it in
+	the function findMax: void findMax(int arr[], int n, int* &pToMax);
+c) The problem here is that the main function has ptr uninitialized, when
+it needs to point to the number you plan on computing the cube of:
+	int main()
+	{
+		int num = 5;
+		int* ptr = &num;
+		computeCube(5, ptr);
+		cout << "Five Cubed is " << *ptr << endl;
+	}
+d) Problems: you cannot compare a memory address to an integer (0) and this program 
+improperly compares memory addresses to each other: making the boolean statement
+to exit the loop always false, which creates an infinite loop
+	bool strequal(const char str1[], const char str2[])
+	{
+		while (*str1 != '\0' || *str2 != '\0')
+		{
+			if (*str1 != *str2)
+				return false;
+			str1++;
+			str2++;
+		}
+		return (str1 - &str1[0]) == (str2 - &str2[0]);
+	}
+e) Since the location of the array is not in the main function, the pointer sent by getPtrToArray only points to the first element of the 
+   array and cannot move freely through the array because it is not in the proper function, resulting in undefined behavior. Also, the 
+   calling of f() and creation of junk moves the pointer to a new undefined location, resulting in more undefined behavior with the output
+   of the integers.
+
+*****2*****
+a) double* cat;
+b) double mouse[5];
+c) cat = &mouse[4];
+d) *cat = 42;
+e) *(mouse + 3) = 25;
+f) cat -= 3;
+g) cat[1] = 17;
+h) cat[0] = 54;
+i) bool b = (*cat == *(cat + 1));
+j) bool d = (cat == mouse);
+
+*****3*****
+a)
+double mean(const double* scores, int numScores)
+{
+	double tot = 0;
+	for (int k = 0; k < numScores; k++)
+	{		
+		tot += *(scores + k);
+	}
+	return tot/numScores;	
+}
+b)
+const char* findTheChar(char* str, char chr)
+{
+	for (int k = 0; *(str + k) != '\0'; k++)
+		{
+			if (*(str + k) == char)
+				return (str + k);
+		}
+	return nullptr;
+}
+c)
+const char* findTheChar(char* str, char chr)
+{
+	char* pToStr = str;
+	while (*pToStr != '\0')
+	{
+		if(*pToStr == chr)
+			return pToStr;
+		pToStar++;
+	}
+	return nullptr;
+}
+
+*****4*****
+3		&array[5] - ptr is 3 because ptr is at array[2] at this moment, which is 3 integers away from array[5]
+4		since 4 gets it's value swapped with arrray[0], it moves from array[3] to array[0], becoming the first element in the array
+79		79 is established at position array[1] because of the following statement: *(array+1) = 79;
+-1		-1 gets swapped with 4 from array[0] to array[2], the pointer to array[1] gets swapped around as well, but swap1 does not 
+		change any values, so 79 remains in array[1]
+9		9 is established in position array[3] when the pointer is initially set to the value 5 at position array[0] and then moved
+		two integers to the right, and then, when ptr is at array[2], 9 is set to ptr[1], which is array[3]
+22		22 is untouched by the functions and remains in its initial positioning
+19		19 is untouched by the functions and remains in its initial positioning
+
+*****5*****
+void removeS(char* chr)
+{
+	while (*chr != '\0')
+	{
+		if (*chr == 's' || *chr == 'S')
+		{
+			for (int k = 0; *(chr + k) != '\0'; k++)
+			{
+				*(chr + k) = *(chr + k + 1);
+			}
+			chr--;
+		}
+		chr++;
+	}
+}
